@@ -1,0 +1,302 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fbf7f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+header {
+    background-color: #0072ce ;
+        color: white;
+        //font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        padding: 6px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "Arsenal SC", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+
+
+}
+ #printBtn {
+        position: fixed; /* Fix the button to a specific position on the screen */
+                top: 65px; /* Distance from the top of the screen */
+                right: 17px; /* Distance from the right edge of the screen */
+                padding: 10px 20px;
+                font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                color: white;
+                background-color: #0072ce; /* Blue background */
+                border: none;
+                border-radius: 50px; /* Rounded edges */
+                cursor:click;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease, box-shadow 0.3s ease;
+                z-index: 1000; /* Ensure the button stays on top of other elements */
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+            }
+    /* Button hover effect */
+    #printBtn:hover {
+        background-color: #034694; /* Darker blue on hover */
+        box-shadow: 5px 6px 8px rgba(0, 0, 0, 0.15);
+         transform: translateY(2px); /* Slight lift on hover */
+
+    }
+
+    /* Button active effect */
+    #printBtn:active {
+        background-color: #034694; /* Even darker blue on click */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Focus effect for accessibility */
+    #printBtn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+    }
+    #emailBtn {
+            position: fixed; /* Fix the button to a specific position on the screen */
+                    top: 65px; /* Distance from the top of the screen */
+                    right: 110px; /* Distance from the right edge of the screen */
+                    padding: 10px 20px;
+                    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: white;
+                    background-color: #0072ce; /* Blue background */
+                    border: none;
+                    border-radius: 50px; /* Rounded edges */
+                    cursor: click;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+                    z-index: 1000; /* Ensure the button stays on top of other elements */
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+                }
+        /* Button hover effect */
+        #emailBtn:hover {
+            background-color: #034694; /* Darker blue on hover */
+            box-shadow: 5px 6px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(2px); /* Slight lift on hover */
+        }
+
+        /* Button active effect */
+        #emailBtn:active {
+            background-color: #034694; /* Even darker blue on click */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Focus effect for accessibility */
+        #emailBtn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+        }
+
+.japan-dashboard-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    animation: fadeInAndMove 1s ease-out forwards;
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1.5px;
+}
+
+.japan-dashboard-text:hover {
+    color: white;
+    transform: scale(1.09);
+}
+
+
+        .header-link {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 18px;
+            color: #fff;
+            cursor: e-resize;
+            text-decoration: none;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .header-link:hover {
+            color: #fff;
+            background: #034694; /* Change background color on hover */
+            box-shadow: 0 0 10px #007bff, 0 0 40px #007bff, 0 0 80px #007bff; /* Add glow effect */
+            transform: translateY(4px); /* Slight lift on hover */
+        }
+
+
+        .header-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .header-link:hover::before {
+            left: 100%; /* Slide effect on hover */
+        }
+
+        .header-link:active {
+            transform: scale(0.95); /* Slightly shrink on click */
+            background-color: #0056b3; /* Change background color on click */
+        }
+
+
+
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-family: Nova Square;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+}
+.dashboard-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center; /* Center the items horizontally */
+}
+/* Prevent color change for chart headings */
+.dashboard-section h3 a:link,
+.dashboard-section h3 a:visited,
+.dashboard-section h3 a:hover,
+.dashboard-section h3 a:active {
+    color: inherit; /* Keep the color same as the parent element */
+    text-decoration: none; /* Remove the underline */
+}
+
+.chart-container h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+.chart-container1 {
+    background-color: white;
+    text-color: black;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-margin: 10px;
+    flex: 1 1 25%; /* Change to 30% to ensure 3 charts per row */
+    margin: 1rem;
+    min-width: 300px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .chart-container1:hover {
+        transform: scale(1.05); /* Slight zoom effect */
+        box-shadow: 0 20px 30px rgba(0, 0, 0.4, 0.4); /* Add shadow effect */
+    }
+}
+
+.chart-pie {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    box-margin: 100px;
+    flex: 1 1 25%; /* Change to 30% to ensure 3 charts per row */
+    margin: 1rem;
+    min-width: 300px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .chart-pie:hover {
+        transform: scale(1.05); /* Slight zoom effect */
+        box-shadow: 0 20px 30px rgba(0, 0, 0.4, 0.4); /* Add shadow effect */
+    }
+}
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .chart-container {
+        flex: 1 1 30%; /* Adjust to 45% for medium screens */
+    }
+}
+@media (max-width: 768px) {
+    .chart-container {
+        flex: 1 1 100%; /* Full width for small screens */
+    }
+}
+
+
+/* Background overlay */
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+    z-index: 998; /* Just below the modal */
+}
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    width: 70%; /* Adjust width to 70-80% of screen */
+    height: 70%; /* Adjust height to 70-80% of screen */
+    background-color: rgba(238,232,230); /* Black with opacity */
+    border: 2px solid #ccc; /* Optional border for modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    padding: 20px; /* Padding around the chart */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal h2 {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 24px;
+    color: black;
+    text-align: center;
+}
+
+.modal canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+

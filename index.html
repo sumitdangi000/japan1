@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <link href='https://fonts.googleapis.com/css?family=Nova Square' rel='stylesheet'>
+    <img src="infosys.png" alt="Infosys logo" style="width:105px;height:px;"align="left"><h1></h1>
+    <h1><a style="text-decoration:none" href="index.html"><h1 class="japan-dashboard-text">Japan Dashboard</h1></a>
+    </h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1>
+    <h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1><h1></h1>
+    <img src="japan.png" alt="Japan" style="width:65px;height:px;"align="left">
+    <nav>
+        <ul>
+            <div class="header">
+                <a href="#" class="header-link">Talent Dashboard</a>
+                <a href="#" class="header-link">Financial Dashboard</a>
+                <a href="#" class="header-link">Operations Dashboard</a>
+                <a href="#" class="header-link">SPO Dashboard</a>
+            </div>
+
+        </ul>
+    </nav>
+</header>
+<br>
+
+<div>
+    <button id="printBtn">Save</button>
+</div>
+<div>
+    <button id="emailBtn">Email</button>
+</div>
+<section class="dashboard-section">
+    <div class="chart-container1">
+        <h3>Japan Revenue Trend (31st Mar Exch)</h3>
+        <canvas id="revenueTrendChart"></canvas>
+    </div>
+    <div class="chart-container1">
+        <h3>Japan Utilization/Head Count</h3>
+        <canvas id="utilizationChart"></canvas>
+    </div>
+    <div class="chart-container1">
+        <h3>Japan Peak Prod HC Trend</h3>
+        <canvas id="peakProdChart"></canvas>
+    </div>
+
+    <div class="chart-pie">
+        <h3>Japan Pending Billing</h3>
+        <canvas id="pendingBillingChart"></canvas>
+    </div>
+    <div class="chart-pie">
+        <h3>Japan Pre-Production</h3>
+        <canvas id="preProductionChart"></canvas>
+    </div>
+    <div class="chart-pie">
+        <h3>Japan Demand Data</h3>
+        <canvas id="demandDataChart"></canvas>
+    </div>
+    <div class="chart-container1">
+        <h3>Japan Role Mix</h3>
+        <canvas id="roleMixChart"></canvas>
+    </div>
+
+    <div class="chart-container1">
+        <h3>Japan Visa Utilization</h3>
+        <canvas id="visaUtilizationChart"></canvas>
+    </div>
+    <div class="chart-container1">
+        <h3>Japan Onsite Bench</h3>
+        <canvas id="onsiteBenchChart"></canvas>
+    </div>
+
+</section>
+<script src="scripts.js"></script>
+<!-- Background overlay -->
+<div id="modalOverlay" class="modal-overlay"></div>
+
+<!-- Modal Structure -->
+<div id="chartModal" class="modal">
+    <span class="close">&times;</span>
+    <h2 id="modalChartTitle"></h2> <!-- This will display the chart's name -->
+    <canvas id="modalChart" style="width: 100%; height: 100%;"></canvas>
+</div>
+
+
+
+
+</body>
+</html>
