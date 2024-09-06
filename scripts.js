@@ -1,3 +1,24 @@
+// Function to toggle table visibility
+function showDetails(tableId) {
+    var table = document.getElementById(tableId);
+    if (table.style.display === "none") {
+        table.style.display = "block";
+    } else {
+        table.style.display = "none";
+    }
+}
+
+// Function to download table data as an Excel file
+function downloadExcel(tableId, filename) {
+    var table = document.getElementById(tableId);
+    var wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+    XLSX.writeFile(wb, filename);
+}
+
+// Include the XLSX library for exporting Excel files
+var script = document.createElement('script');
+script.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+document.head.appendChild(script);
 
 document.addEventListener('DOMContentLoaded', function() {
     const chartModal = document.getElementById('chartModal');
@@ -32,15 +53,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+
+
+
+
+
+
     // Chart initialization
-    const createChart = (id, type, data, options) => {
-        const ctx = document.getElementById(id).getContext('2d');
-        return new Chart(ctx, {
-            type,
-            data,
-            options
-        });
-    };
+const createChart = (id, type, data, options) => {
+    const ctx = document.getElementById(id).getContext('2d');
+    return new Chart(ctx, {
+        type,
+        data,
+        options: {
+            ...options,
+            responsive: true,
+            plugins: {
+                legend: { display: true }, // or false depending on your preference
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            let label = tooltipItem.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.raw * 100) / 100;
+
+                            // Additional information for hover
+                            let additionalInfo = '';
+                            if (tooltipItem.dataset.label === 'Revenue') {
+                                additionalInfo = `\nProjected: ${tooltipItem.raw * 1.1}`;
+                            } else if (tooltipItem.dataset.label === 'Total HC') {
+                                additionalInfo = `\nGrowth Rate: ${(tooltipItem.raw / 17500 * 100).toFixed(2)}%`;
+                            }
+                            // You can add more conditions based on the dataset.label or other data
+
+                            return label + additionalInfo;
+                        },
+                        afterLabel: function (tooltipItem) {
+                            // Any additional details that should be shown after the label
+                            return 'Lekin aur kya dikhana hai wo toh bata bhai';
+                        }
+                    },
+                    backgroundColor: '#f1f1f1', // Customize tooltip background color
+                    titleColor: '#000',          // Customize title color
+                    bodyColor: '#000',           // Customize body text color
+                    borderColor: '#0072ce',      // Tooltip border color
+                    borderWidth: 1,              // Tooltip border width
+                }
+            }
+        }
+    });
+};
+
+
+
 
     createChart('revenueTrendChart', 'line', {
         labels: ['Q1 Act', 'Q2 BE', 'Q2 BE', 'Q2 ', 'Q2 '],
@@ -146,10 +213,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 responsive: true,
                 plugins: { legend: { display: true } }
             });
-
-
-
-    // Handle chart modal functionality
+        createChart('visaUtilizationChart1', 'bar', {
+                    labels: ['May', 'Jun', 'Jul', 'Curr Week'],
+                    datasets: [
+                        { label: 'Valid Visa', data: [71.7, 72.5, 72.3, 69.5], backgroundColor: '#1a73e8' },
+                        { label: 'Valid Petition', data: [17.7, 17.7, 17.7, 17.7], backgroundColor: '#e8711a' }
+                    ]
+                }, {
+                    responsive: true,
+                    plugins: { legend: { display: true } }
+                });
+        createChart('onsiteBenchChart1', 'bar', {
+                        labels: ['<= 7 days', '8-30 days', '31-60 days', '> 60 days'],
+                        datasets: [{
+                            label: 'Onsite Bench',
+                            data: [106, 24, 30, 29],
+                            backgroundColor: ['#e8711a', '#fbbc05', '#34a853', '#1a73e8']
+                        }]
+                    }, {
+                        responsive: true,
+                        plugins: { legend: { display: true } }
+                    });
+    // Handle chart modal functionality(bar)
     document.querySelectorAll('.chart-container1 canvas').forEach(function(chartCanvas) {
         chartCanvas.addEventListener('click', function() {
             const chartId = chartCanvas.getAttribute('id');
@@ -204,11 +289,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
 
-    // Close the modal when the user clicks on <span> (x)
+    // Close the modal when the user clicks on (X)
     document.querySelector('.close').addEventListener('click', function() {
         chartModal.style.display = 'none';
         modalOverlay.style.display = 'none'; // Hide the overlay
     });
+
+
 
 
 });
