@@ -51,7 +51,7 @@ public class HomeController : Controller
 
 
 
-
+// Function to fetch data from SQL
 async function fetchDataFromSQL() {
     try {
         const response = await fetch('/Home/GetChartData');
@@ -60,34 +60,6 @@ async function fetchDataFromSQL() {
         // Assuming the response has labels and dataset arrays for charts
         const chartLabels = data.labels;
         const chartData = data.values;
-
-        // Update chart with new data
-        updateChart('revenueTrendChart', chartLabels, chartData);
-
-        // Update table with the same data
-        updateTable('revenueDetailsTable', chartLabels, chartData);
-    } catch (error) {
-        console.error("Error fetching data from SQL:", error);
-    }
-}
-
-
-
-
-
-
-
-
-
-// Function to fetch data from SQL
-async function fetchDataFromSQL() {
-    try {
-        const response = await fetch('/api/getChartData'); // Adjust API endpoint as necessary
-        const data = await response.json();
-
-        // Assuming the response has labels and dataset arrays for charts
-        const chartLabels = data.labels; // Example: ['Jan', 'Feb', 'Mar', etc.]
-        const chartData = data.values;   // Example: [123, 150, 170, etc.]
 
         // Update chart with new data
         updateChart('revenueTrendChart', chartLabels, chartData);
