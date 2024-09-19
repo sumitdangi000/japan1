@@ -70,3 +70,38 @@ async function fetchDataFromSQL() {
         console.error("Error fetching data from SQL:", error);
     }
 }
+
+
+
+
+
+
+
+
+
+const express = require('nodejs');
+const mysql = require('mysql');
+const app = express();
+
+const db = mysql.createConnection({
+    host: 'localhost:3306',
+    user: 'root',
+    password: '12345678',
+    database: 'japan'
+});
+
+app.get('/api/getChartData', (req, res) => {
+    const query = 'SELECT * FROM data'; // Customize your query
+    db.query(query, (err, results) => {
+        if (err) throw err;
+
+        const labels = results.map(row => row.EmpNo);
+        const values = results.map(row => row.EmpName);
+
+        res.json({ labels, values });
+    });
+});
+
+app.listen(3306, () => {
+    console.log('Server running on port 3306');
+});
