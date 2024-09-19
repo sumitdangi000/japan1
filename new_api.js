@@ -79,6 +79,54 @@ async function fetchDataFromSQL() {
 
 
 
+// Function to fetch data from SQL
+async function fetchDataFromSQL() {
+    try {
+        const response = await fetch('/api/getChartData'); // Adjust API endpoint as necessary
+        const data = await response.json();
+
+        // Assuming the response has labels and dataset arrays for charts
+        const chartLabels = data.labels; // Example: ['Jan', 'Feb', 'Mar', etc.]
+        const chartData = data.values;   // Example: [123, 150, 170, etc.]
+
+        // Update chart with new data
+        updateChart('revenueTrendChart', chartLabels, chartData);
+
+        // Update table with the same data
+        updateTable('revenueDetailsTable', chartLabels, chartData);
+    } catch (error) {
+        console.error("Error fetching data from SQL:", error);
+    }
+}
+
+// Function to update the chart
+function updateChart(chartId, labels, data) {
+    const chart = Chart.getChart(chartId);
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = data;
+    chart.update();
+}
+
+// Function to update the table
+function updateTable(tableId, labels, data) {
+    const tableBody = document.querySelector(`#${tableId} tbody`);
+    tableBody.innerHTML = ''; // Clear existing table rows
+    labels.forEach((label, index) => {
+        const row = `<tr><td>${label}</td><td>${data[index]}</td></tr>`;
+        tableBody.insertAdjacentHTML('beforeend', row);
+    });
+}
+
+// Add event listener to the button
+fetchDataBtn.addEventListener('click', function() {
+    // Code to execute when the button is clicked
+    console.log('Button clicked!');
+    fetchDataFromSQL(); // Call the function to fetch data from SQL
+});
+
+
+
+
 const express = require('nodejs');
 const mysql = require('mysql');
 const app = express();
