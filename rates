@@ -1,0 +1,102 @@
+// appsettings.json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=your-server-name;Database=your-database-name;User Id=your-username;Password=your-password;"
+  }
+}
+
+// Program.cs
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+// ApplicationDbContext.cs
+using Microsoft.EntityFrameworkCore;
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+    public DbSet<TableRow> TableRows { get; set; }
+}
+
+// TableRow.cs
+public class TableRow
+{
+    public int Id { get; set; }
+    public string Column1 { get; set; }
+    public string Column2 { get; set; }
+    public string Column3 { get; set; }
+    public string Column4 { get; set; }
+}
+
+// ExportController.cs
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ExportController : ControllerBase
+{
+    private readonly ApplicationDbContext _context;
+
+    public ExportController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet("download-excel")]
+    public async Task<IActionResult> DownloadExcel()
+    {
+        var data = await _context.TableRows.ToListAsync();
+
+        using var package = new ExcelPackage();
+        var worksheet = package.Workbook.Worksheets.Add("Data");
+
+        worksheet.Cells["A1"].LoadFromCollection(data, true);
+
+        // Lock all cells
+        worksheet.Cells[worksheet.Dimension.Address].Style.Locked = true;
+
+        // Unlock specific columns
+        worksheet.Column(2).Style.Locked = false; // Column1 editable
+        worksheet.Column(3).Style.Locked = false; // Column2 editable
+
+        // Protect the worksheet
+        worksheet.Protection.IsProtected = true;
+
+        var stream = new MemoryStream();
+        package.SaveAs(stream);
+        stream.Position = 0;
+
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Data.xlsx");
+    }
+}
+
